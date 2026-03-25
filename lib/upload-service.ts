@@ -19,8 +19,7 @@ export async function deployHtml(
   const slug = await generateSlug(htmlContent, filename)
   const blobPath = `sites/${slug}/index.html`
 
-  const encoder = new TextEncoder()
-  const bytes = encoder.encode(htmlContent)
+  const bytes = Buffer.from(htmlContent, 'utf-8')
 
   const blob = await put(blobPath, bytes, {
     contentType: 'text/html; charset=utf-8',
